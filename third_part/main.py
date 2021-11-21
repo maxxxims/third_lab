@@ -3,17 +3,15 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 file_name = 'data.txt'
-
-
 GIF_FPS = 15
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
 
+
 data_n = np.genfromtxt(file_name)
 
 A = (np.eye(len(data_n)) - np.eye(len(data_n), k=-1))
-
-#data_n1 = (data_n - A @ np.transpose(data_n))
+A[0, len(data_n) -1] = -1
 
 
 def animate(i):
