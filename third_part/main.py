@@ -11,14 +11,14 @@ ax = fig.add_subplot(1, 1, 1)
 
 data_n = np.genfromtxt(file_name)
 
-A = 0.5 * (np.eye(len(data_n)) - np.eye(len(data_n), k=-1))
+A = (np.eye(len(data_n)) - np.eye(len(data_n), k=-1))
 
 #data_n1 = (data_n - A @ np.transpose(data_n))
 
 
 def animate(i):
     global data_n
-    data_n1 = data_n - A @ data_n
+    data_n1 = data_n - 0.5 * A @ (data_n)
     data_n = data_n1
 
     ax.clear()
@@ -30,7 +30,7 @@ def animate(i):
     ax.plot(data_n1)
 
 
-result = animation.FuncAnimation(fig, animate)
+result = animation.FuncAnimation(fig, animate, frames=255)
 result.save('animation.gif', writer='imagemagick', fps=GIF_FPS)
 #plt.show()
 print()
